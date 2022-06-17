@@ -341,7 +341,7 @@ fabric.properties
 modules.xml
 .idea/misc.xml
 *.ipr
-.xml
+*.xml
 identifier.sqlite
 
 # End of https://www.toptal.com/developers/gitignore/api/django,pycharm,pycharm+iml
