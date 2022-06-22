@@ -67,7 +67,8 @@ class ArticleCreateSerializer(serializers.ModelSerializer):
         return attrs
 
     def create(self, validated_data):
-        categories = validated_data.pop("category")
+        print(validated_data)
+        categories = validated_data.pop("categories")
         a = Article.objects.create(**validated_data)
         a.category.add(*categories)
         return a

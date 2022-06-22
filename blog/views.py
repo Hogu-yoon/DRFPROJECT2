@@ -18,9 +18,11 @@ class ArticleListView(APIView):
         # request.data의 dict 형태가 **를 붙임으로써 kwargs로 들어감
         # *를 붙임으로써 args로 들어감
 
+        # print(type(eval(request.data["categories"])))
+
         a = ArticleCreateSerializer(data=request.data)
         if a.is_valid():
-            a.save(writer=self.request.user)
+            a.save(writer=self.request.user, categories=eval(request.data["categories"]))
             return Response(a.data)
 
         return Response(a.errors)
@@ -38,6 +40,6 @@ class UserArticleView(APIView):
 
     def get(self, request):
         # 반드시 하나이상의 쿼리셋일때는 many=True
-        articles = ArticleSerializer(instance=Article.objects.filter(writer=request.user),many=True)
+        articles = ArticleSerializer(instance=Article.objects.filter(writer=request.user), many=True)
 
         return Response(articles.data, status=status.HTTP_200_OK)
